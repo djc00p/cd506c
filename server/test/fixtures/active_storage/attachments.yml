@@ -1,0 +1,22 @@
+pf1_file:
+  name: file
+  record: pf1 (ProspectsFiles)
+  record_id: <%= ActiveRecord::FixtureSet.identify(:pf1) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:csv_file1) %>
+pf2_file:
+  name: file
+  record: pf2 (ProspectsFiles)
+  record_id: <%= ActiveRecord::FixtureSet.identify(:pf2) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:csv_file2) %>
+
+pf3_file:
+  name: file
+  record: pf3 (ProspectsFiles)
+  record_id: <%= ActiveRecord::FixtureSet.identify(:pf3) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:csv_file3) %>
+
+pf4_file:
+  name: file
+  record: pf4 (ProspectsFiles)
+  record_id: <%= ActiveRecord::FixtureSet.identify(:pf4) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:csv_file4) %>

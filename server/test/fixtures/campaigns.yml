@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: campaign1
+  user_id: 1
+
+two:
+  name: campaign2
+  user_id: 1
+
+three:
+  name: campaign4
+  user_id: 2
+
+four:
+  name: campaign3
+  user_id: 2

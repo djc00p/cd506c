@@ -1,0 +1,46 @@
+pf1:
+  id: 1
+  file: "test.csv"
+  email_index: 0
+  first_name_index?: 1
+  last_name_index?: 2
+  force?: true
+  has_headers?: true
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  user_id: 1
+pf2:
+  id: 2
+  file: "test2.csv"
+  email_index: 0
+  first_name_index?: 1
+  last_name_index?: 2
+  force?: true
+  has_headers?: false
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  user_id: 1
+
+pf3:
+  id: 3
+  file: "test.csv"
+  email_index: 2
+  first_name_index?: 0
+  last_name_index?: 1
+  force?: false
+  has_headers?: true
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  user_id: 1
+
+pf4:
+  id: 4
+  file: "test2.csv"
+  email_index: 2
+  first_name_index?: 0
+  last_name_index?: 1
+  force?: false
+  has_headers?: false
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  user_id: 1
