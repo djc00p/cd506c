@@ -21,7 +21,7 @@ class ProspectsFilesImportJobTest < ActiveJob::TestCase
   test "job add to queue" do
     assert_no_enqueued_jobs
 
-    ProspectsFilesImportJob.perform_later(@prospects_files1.id)
+    ProspectsFilesImportJob.perform_later(@prospects_files1)
 
     assert_enqueued_jobs 1
   end
@@ -30,7 +30,7 @@ class ProspectsFilesImportJobTest < ActiveJob::TestCase
     assert_no_performed_jobs
 
     perform_enqueued_jobs do
-      ProspectsFilesImportJob.perform_later(@prospects_files2.id)
+      ProspectsFilesImportJob.perform_later(@prospects_files2)
     end
 
     assert_performed_jobs 1
@@ -40,7 +40,7 @@ class ProspectsFilesImportJobTest < ActiveJob::TestCase
     assert_equal(Prospect.count, 4)
 
     perform_enqueued_jobs do
-      ProspectsFilesImportJob.perform_now(@prospects_files1.id)
+      ProspectsFilesImportJob.perform_now(@prospects_files1)
       assert_equal(Prospect.count, 104)
     end
   end
@@ -49,7 +49,7 @@ class ProspectsFilesImportJobTest < ActiveJob::TestCase
     assert_equal(prospects(:one).first_name, "MyText")
 
     perform_enqueued_jobs do
-      ProspectsFilesImportJob.perform_now(@prospects_files2.id)
+      ProspectsFilesImportJob.perform_now(@prospects_files2)
 
       assert_equal(Prospect.where(email: prospects(:one).email)[0].first_name, "NewName")
     end
@@ -59,7 +59,7 @@ class ProspectsFilesImportJobTest < ActiveJob::TestCase
     assert_equal(Prospect.where(email: prospects(:one).email).count, 4)
 
     perform_enqueued_jobs do
-      ProspectsFilesImportJob.perform_now(@prospects_files3.id)
+      ProspectsFilesImportJob.perform_now(@prospects_files3)
 
       assert_equal(Prospect.where(email: prospects(:one).email).count, 5)
     end
@@ -69,7 +69,7 @@ class ProspectsFilesImportJobTest < ActiveJob::TestCase
     assert_equal(Prospect.count, 4)
 
     perform_enqueued_jobs do
-      ProspectsFilesImportJob.perform_now(@prospects_files3.id)
+      ProspectsFilesImportJob.perform_now(@prospects_files3)
 
       assert_equal(Prospect.count, 105)
       assert_equal(Prospect.where(email: prospects(:one).email).count, 5)
@@ -81,7 +81,7 @@ class ProspectsFilesImportJobTest < ActiveJob::TestCase
     assert_equal(Prospect.where(email: "mahro@ew.gg").count, 0)
 
     perform_enqueued_jobs do
-      ProspectsFilesImportJob.perform_now(@prospects_files4.id)
+      ProspectsFilesImportJob.perform_now(@prospects_files4)
 
     assert_equal(Prospect.count, 107)
     assert_equal(Prospect.where(email: "mahro@ew.gg").count, 2)
