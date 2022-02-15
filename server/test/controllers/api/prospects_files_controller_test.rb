@@ -82,7 +82,7 @@ class Api::ProspectsFilesControllerTest < ActionDispatch::IntegrationTest
     assert_enqueued_jobs 1
 
     pf = ProspectsFiles.order(:created_at).last
-    
+
     perform_enqueued_jobs
 
     response_body = {
