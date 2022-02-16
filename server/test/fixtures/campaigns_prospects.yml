@@ -1,0 +1,7 @@
+cp_one:
+  campaign_id: 1
+  prospect_id: 1
+
+cp_two:
+  campaign_id: 2
+  prospect_id: 2
