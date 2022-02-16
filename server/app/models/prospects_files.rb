@@ -24,6 +24,7 @@ class ProspectsFiles < ApplicationRecord
 
     Prospect.where(user_id: self.user_id)
             .where(created_at: self.created_at..time)
+            .where(updated_at: self.created_at..time)
             .count
   end
 
