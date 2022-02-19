@@ -2,13 +2,13 @@ class Api::ProspectsFilesController < ApplicationController
   before_action :file_length_validation, only: [:import]
 
   def import
-    pf_import = ProspectsFiles.new({
+    prospect_file = ProspectsFiles.new({
       **prospects_files_params,
       user_id: @user.id})
-    pf_import[:file] = prospects_files_params[:file].original_filename
+    prospect_file[:file] = prospects_files_params[:file].original_filename
 
-    if pf_import.save
-      ProspectsFilesImportJob.perform_later(pf_import)
+    if prospect_file.save
+      ProspectsFilesImportJob.perform_later(prospect_file)
 
       render json: { message: "Thank you! Your file is being processed now."}
     else
@@ -18,11 +18,11 @@ class Api::ProspectsFilesController < ApplicationController
   end
 
   def progress
-    pf_import = ProspectsFiles.find(params[:id])
-    total = pf_import.row_count
-    done =  pf_import.done
+    prospect_file = ProspectsFiles.find(params[:id])
+    total = prospect_file.row_count
+    done =  prospect_file.done
 
-    if pf_import.present?
+    if prospect_file.present?
       render json: { total: total, done: done }
     else
       render json: { error: "File not found" }, status: :not_found
@@ -36,8 +36,8 @@ class Api::ProspectsFilesController < ApplicationController
   end
 
   def file_length_validation
-    hh = ActiveRecord::Type::Boolean.new.cast(params[:has_headers?])
-    file_length = CSV.read(params[:file], headers: hh).count
+    has_headers = ActiveRecord::Type::Boolean.new.cast(params[:has_headers?])
+    file_length = CSV.read(params[:file], headers: has_headers).count
     if file_length > 1000000
       errors[:file] << "should be less than 1,000,000 rows"
     end
