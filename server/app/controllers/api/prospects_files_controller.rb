@@ -25,8 +25,7 @@ class Api::ProspectsFilesController < ApplicationController
     if pf_import.present?
       render json: { total: total, done: done }
     else
-      render json: { error: "File not found",
-                     status: :not_found}
+      render json: { error: "File not found" }, status: :not_found
     end
   end
 
