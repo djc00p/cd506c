@@ -17,7 +17,7 @@ class Api::ProspectsFilesController < ApplicationController
   end
 
   def progress
-    prospect_file = ProspectsFiles.find(params[:id])
+    prospect_file = ProspectsFiles.find_by(id: params[:id], user_id: @user.id)
     total = prospect_file.row_count
     done =  prospect_file.done
 
