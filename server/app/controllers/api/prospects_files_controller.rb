@@ -12,8 +12,7 @@ class Api::ProspectsFilesController < ApplicationController
 
       render json: { message: "Thank you! Your file is being processed now."}
     else
-      render json: { error: "File unable to be processed",
-                     status: :unprocessable_entity }
+      render json: { error: prospect_file.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -25,7 +24,7 @@ class Api::ProspectsFilesController < ApplicationController
     if prospect_file.present?
       render json: { total: total, done: done }
     else
-      render json: { error: "File not found" }, status: :not_found
+      render json: { error: prospect_file.errors.full_messages }, status: :not_found
     end
   end
 
