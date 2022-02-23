@@ -9,13 +9,13 @@ class ProspectsFiles < ApplicationRecord
             size: { less_than_or_equal_to: 200.megabytes, message: 'file to big'}
 
   def csv_import(prospect_file)
-    prospect_file.blob.open(tmpdir: Rails.root.join('tmp')) do |tmp_file|
-      parse_tmp_csv_file(tmp_file)
+    prospect_file.blob.open(tmpdir: Rails.root.join('tmp')) do |tmp_file_path|
+      parse_tmp_csv_file(tmp_file_path)
     end
   end
 
-  def parse_tmp_csv_file(file)
-    CSV.foreach(file, headers: self.has_headers?) do |row|
+  def parse_tmp_csv_file(file_path)
+    CSV.foreach(file_path, headers: self.has_headers?) do |row|
       email = headers?(row.to_a[self.email_index])
       first_name = headers?(row.to_a[self.first_name_index?])
       last_name = headers?(row.to_a[self.last_name_index?])
