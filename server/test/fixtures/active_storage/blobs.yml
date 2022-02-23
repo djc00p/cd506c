@@ -1,0 +1,26 @@
+csv_file1:
+  key: "otl8d8f7fhu5qri4zl8sai77lec3"
+  filename: "test.csv"
+  content_type: "text/csv"
+  byte_size: 3029
+  service_name: test_fixtures
+csv_file2:
+  key: "67890"
+  filename: "test2.csv"
+  content_type: "text/csv"
+  byte_size: 3001
+  service_name: local
+
+csv_file3:
+  key: "13579"
+  filename: "test.csv"
+  content_type: "text/csv"
+  byte_size: 3029
+  service_name: local
+
+csv_file4:
+  key: "02468"
+  filename: "test2.csv"
+  content_type: "text/csv"
+  byte_size: 3001
+  service_name: local
