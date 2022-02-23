@@ -3,6 +3,7 @@ class ProspectsFiles < ApplicationRecord
 
   has_one_attached :file
   belongs_to :user
+  has_many :prospects
   validates_presence_of :email_index
   validates :file,
             attached: true,
