@@ -3,6 +3,12 @@ require_relative "../config/environment"
 require "rails/test_help"
 require 'active_storage_validations/matchers'
 
+module FixtureFileHelpers
+  def csv_count(path, headers)
+    CSV.read(Rails.root.join('test/fixtures', path), headers: headers).count
+  end
+end
+ActiveRecord::FixtureSet.context_class.include FixtureFileHelpers
 
 class ActiveSupport::TestCase
   extend ActiveStorageValidations::Matchers
