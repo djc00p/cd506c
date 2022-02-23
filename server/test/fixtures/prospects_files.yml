@@ -9,6 +9,7 @@ pf1:
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
   user_id: 1
+  total_rows: <%= csv_count('files/test.csv', true) %>
 pf2:
   id: 2
   file: "test2.csv"
@@ -20,6 +21,7 @@ pf2:
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
   user_id: 1
+  total_rows: <%= csv_count('files/test2.csv', false) %>
 
 pf3:
   id: 3
@@ -32,6 +34,7 @@ pf3:
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
   user_id: 1
+  total_rows: <%= csv_count('files/test3.csv', true) %>
 
 pf4:
   id: 4
@@ -44,3 +47,4 @@ pf4:
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
   user_id: 1
+  total_rows: <%= csv_count('files/test4.csv', false) %>

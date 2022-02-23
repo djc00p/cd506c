@@ -5,21 +5,25 @@ one:
   first_name: MyText
   last_name: MyText
   user_id: 1
+  prospects_file_id: null
 
 two:
   email: MyString
   first_name: MyText
   last_name: MyText
   user_id: 1
+  prospects_file_id: null
 
 three:
   email: MyString
   first_name: MyText
   last_name: MyText
   user_id: 2
+  prospects_file_id: null
 
 four:
   email: MyString
   first_name: MyText
   last_name: MyText
   user_id: 2
+  prospects_file_id: null
