@@ -1,7 +1,8 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative "../config/environment"
 require "rails/test_help"
-require 'active_storage_validations/matchers'
+require "active_storage_validations/matchers"
+require "csv"
 
 module FixtureFileHelpers
   def csv_count(path, headers)
