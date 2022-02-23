@@ -61,7 +61,7 @@ class ProspectsFilesImportJobTest < ActiveJob::TestCase
     perform_enqueued_jobs do
       ProspectsFilesImportJob.perform_now(@prospects_files3)
 
-      assert_equal(Prospect.where(email: prospects(:one).email).count, 5)
+      assert_equal(Prospect.where(email: prospects(:one).email).count, 4)
     end
   end
 
@@ -71,8 +71,8 @@ class ProspectsFilesImportJobTest < ActiveJob::TestCase
     perform_enqueued_jobs do
       ProspectsFilesImportJob.perform_now(@prospects_files3)
 
-      assert_equal(Prospect.count, 105)
-      assert_equal(Prospect.where(email: prospects(:one).email).count, 5)
+      assert_equal(Prospect.count, 104)
+      assert_equal(Prospect.where(email: prospects(:one).email).count, 4)
     end
   end
 
@@ -83,8 +83,8 @@ class ProspectsFilesImportJobTest < ActiveJob::TestCase
     perform_enqueued_jobs do
       ProspectsFilesImportJob.perform_now(@prospects_files4)
 
-    assert_equal(Prospect.count, 107)
-    assert_equal(Prospect.where(email: "mahro@ew.gg").count, 2)
+    assert_equal(Prospect.count, 104)
+    assert_equal(Prospect.where(email: "mahro@ew.gg").count, 1)
     end
   end
 end

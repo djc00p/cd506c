@@ -17,11 +17,6 @@ class Api::ProspectsFilesControllerTest < ActionDispatch::IntegrationTest
     @pf = prospects_files(:pf1)
   end
 
-  def teardown
-    ProspectsFiles.destroy_all
-    ActiveJob::Base.queue_adapter.enqueued_jobs = nil
-  end
-
   test "that the import action is properly routed" do
     assert_generates "/api/prospects_files/import", controller: "api/prospects_files", action: "import"
   end
@@ -35,7 +30,7 @@ class Api::ProspectsFilesControllerTest < ActionDispatch::IntegrationTest
 
   test "import prospects_files and add to job queue" do
     request_body = {
-    	file: @file,
+    	file: fixture_file_upload("test3.csv", "text/csv"),
     	email_index: "0",
     	first_name_index?: "1",
     	last_name_index?: "2",
@@ -52,6 +47,7 @@ class Api::ProspectsFilesControllerTest < ActionDispatch::IntegrationTest
 
     pf = ProspectsFiles.order(:created_at).last
     assert pf.file.attached?
+    assert_equal CSV.read(request_body[:file], headers: pf[:has_headers?]).count, pf[:total_rows]
     assert_enqueued_jobs 1
     assert_equal response_body, @response.body
   end
@@ -75,21 +71,13 @@ class Api::ProspectsFilesControllerTest < ActionDispatch::IntegrationTest
     ProspectsFilesImportJob.perform_later(@pf)
 
     assert_enqueued_jobs 1
-    
+
     perform_enqueued_jobs
 
-    loop do
-      prospects_files(:pf1).file.attach(@file)
-      @pf = prospects_files(:pf1)
-      break if @pf.file.download.present?
-    end
-
     response_body = {
-      total: @pf.row_count,
-	    done: @pf.done
+      total: CSV.read(@file, headers: @pf[:has_headers?]).count,
+	    done: Prospect.where(user_id: @user.id, prospects_file_id: @pf.id).count
     }.to_json
-
-    sleep(1)
 
     get "/api/prospects_files/#{@pf.id}/progress", headers: headers2, xhr: true
 
