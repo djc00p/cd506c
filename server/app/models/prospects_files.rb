@@ -30,6 +30,7 @@ class ProspectsFiles < ApplicationRecord
     if force && Prospect.exists?(email: email, user_id: user_id)
       update_prospect(email, first_name, last_name, user_id, prospects_file_id)
     elsif force == false && Prospect.exists?(email: email, user_id: user_id)
+      # Do nothing with exisiting Prospect since force is false
     else
       create_prospect(email, first_name, last_name, user_id, prospects_file_id)
     end
