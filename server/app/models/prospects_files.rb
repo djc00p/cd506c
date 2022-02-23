@@ -10,25 +10,6 @@ class ProspectsFiles < ApplicationRecord
             content_type: { in: 'text/csv', message: 'Not a CSV File' },
             size: { less_than_or_equal_to: 200.megabytes, message: 'file to big'}
 
-  def row_count
-    total_rows = CSV.foreach(
-      tmp_file_path(self.file.download),
-      headers: self.has_headers?
-    ).count
-
-    delete_tmp(tmp_file_path(self.file.download))
-    total_rows
-  end
-
-  def done
-    time = Time.zone.now
-
-    Prospect.where(user_id: self.user_id)
-            .where(created_at: self.created_at..time)
-            .where(updated_at: self.created_at..time)
-            .count
-  end
-
   def csv_import(pf_data)
     CSV.foreach(tmp_file_path(pf_data), headers: self.has_headers?) do |row|
       email = headers?(row.to_a[self.email_index])
